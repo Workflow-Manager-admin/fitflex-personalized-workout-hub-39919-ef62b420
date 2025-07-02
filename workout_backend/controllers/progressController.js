@@ -1,15 +1,23 @@
+const mockDb = require('../models/mockDataStore');
+
 module.exports = {
   // PUBLIC_INTERFACE
   getProgress: (req, res) => {
-    /** Get user workout progress (Stub) */
-    // TODO: Implement fetching user's progress
-    res.status(501).json({ message: "Get workout progress not implemented yet." });
+    /** Get user workout progress */
+    const { userId } = req.params;
+    const user = mockDb.getUserById(userId);
+    if (!user) return res.status(404).json({ error: "User not found" });
+    const progress = mockDb.getProgress(userId);
+    res.json(progress);
   },
 
   // PUBLIC_INTERFACE
   updateProgress: (req, res) => {
-    /** Update user workout progress (Stub) */
-    // TODO: Implement updating user's progress
-    res.status(501).json({ message: "Update workout progress not implemented yet." });
+    /** Update user workout progress */
+    const { userId } = req.params;
+    const user = mockDb.getUserById(userId);
+    if (!user) return res.status(404).json({ error: "User not found" });
+    const updated = mockDb.updateProgress(userId, req.body);
+    res.json(updated);
   }
 };
