@@ -1,0 +1,19 @@
+const express = require('express');
+const router = express.Router();
+const { registerUser, loginUser } = require('../controllers/authController');
+
+/**
+ * @route POST /auth/register
+ * @desc Register a new user
+ */
+// PUBLIC_INTERFACE
+router.post('/register', registerUser);
+
+/**
+ * @route POST /auth/login
+ * @desc Login a user
+ */
+// PUBLIC_INTERFACE
+router.post('/login', loginUser);
+
+module.exports = router;
